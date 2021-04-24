@@ -1,16 +1,14 @@
 'use strict'
 
-// const StarWarsService = require('App/Services/StarWarsService.js');
+const StarWarService = use('App/Services/StarWarsService');
 const got = require('got');
 
 class StarWarsController {
-  async show({ response }) {
-    // const service = new StarWarsService();
-    // return service.show();
-    console.log('start');
-    const data = await got('https://swapi.dev/api/starships/');
-    console.log(data.body);
-    response.json(data.body);
+  async show({ view }) {
+    const service = new StarWarService();
+    const data = await service.show();
+    console.log(data[0]);
+    return view.render('star-wars', { data });
   }
 }
 
